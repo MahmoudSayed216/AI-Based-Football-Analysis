@@ -43,8 +43,8 @@ def train_model(model_path, model_name):
                 device=[0, 1],  # use both GPUs
 )
 
-
-    val_map = results.box.map
+    val_results = model.val(data=DATASET_DIR, imgsz=640, batch=16, device=[0, 1])
+    val_map = val_results.box.map
     print(f"map@50-95: {val_map}")
     # if os.path.exists(RUN_DIR):
         # shutil.rmtree(RUN_DIR)
