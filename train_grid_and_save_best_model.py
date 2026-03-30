@@ -26,7 +26,7 @@ def train_model(model_path, model_name):
     with SuppressOutput():
         model = YOLO(model=model_path, task='detect', verbose=False)
         model.train(data=DATASET_DIR,
-                    epochs=1, 
+                    epochs=2, 
                     imgsz=640, 
                     batch=16, 
                     verbose=False, 
@@ -38,6 +38,7 @@ def train_model(model_path, model_name):
 
 
         val_map = model.metrics.box.map
+        print(f"map@50-95: {val_map}")
         if val_map > current_best_map:
             current_best_map = val_map
             model.val(data=DATASET_DIR, plots=True)
