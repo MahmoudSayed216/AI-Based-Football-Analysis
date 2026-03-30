@@ -45,6 +45,7 @@ def train_model(model_path, model_name):
         shutil.rmtree(RUN_DIR)
     if val_map > current_best_map:
         shutil.rmtree(OUTPUT_DIR)
+        os.makedirs(name=OUTPUT_DIR, exist_ok=True)
         print("Model updated")
         current_best_map = val_map
         model.val(data=DATASET_DIR, plots=True, project=RUN_DIR)
