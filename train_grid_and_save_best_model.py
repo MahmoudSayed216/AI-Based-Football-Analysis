@@ -27,7 +27,7 @@ def train_model(model_path, model_name):
     print(f"Training {model_name}")
     model = YOLO(model=model_path, task='detect', verbose=False)
     model.train(data=DATASET_DIR,
-                epochs=2, 
+                epochs=100, 
                 imgsz=640, 
                 batch=16, 
                 verbose=False, 
@@ -36,7 +36,8 @@ def train_model(model_path, model_name):
                 save_period=-1,
                 exist_ok=True,
                 val=False,
-                amp=False)
+                amp=False,
+                cos_lr = True)
 
 
     val_map = model.metrics.box.map

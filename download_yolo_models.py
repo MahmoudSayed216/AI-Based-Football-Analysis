@@ -83,7 +83,6 @@ for name in models.keys():
         save_path = os.path.join(model_version_variants_path, f"{i}{model_variant_name}")
         download_weights(weights_url=url, save_path=save_path)
         print(f"{model_variant_name} downloaded to {save_path}.")
-        break
 
     
 
