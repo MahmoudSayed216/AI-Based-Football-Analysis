@@ -63,10 +63,10 @@ models2 = {
 }
 
 models = None
-if sys.argv[0] == "1":
+if sys.argv[1] == "1":
     models = models1
 
-if sys.argv[0] == "2":
+if sys.argv[1] == "2":
     models = models2
 
 for name, urls in models.items():
