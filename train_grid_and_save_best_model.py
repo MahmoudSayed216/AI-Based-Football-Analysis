@@ -13,7 +13,7 @@ SETTINGS['mlflow'] = False
 BASE_DIR = os.getenv("BASE_DIR")
 WEIGHTS_DIR = os.path.join(BASE_DIR, "weights")
 OUTPUT_DIR = os.path.join(BASE_DIR, "best_model")
-DATASET_DIR = os.path.join(BASE_DIR, "dataset")
+DATASET_DIR = os.path.join(BASE_DIR, "dataset", "data.yaml")
 os.makedirs(name=OUTPUT_DIR, exist_ok=True)
 
 current_best_map = -100
