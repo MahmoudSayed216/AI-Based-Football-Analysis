@@ -27,7 +27,7 @@ def train_model(model_path, model_name):
     global current_best_map
     print(f"Training {model_name}")
     model = YOLO(model=model_path, task='detect', verbose=False)
-    model.train(data=DATASET_DIR,
+    results = model.train(data=DATASET_DIR,
                 epochs=2, 
                 imgsz=640, 
                 batch=16, 
@@ -44,7 +44,7 @@ def train_model(model_path, model_name):
 )
 
 
-    val_map = model.trainer.validator.metrics.box.map    
+    val_map = results.box.map
     print(f"map@50-95: {val_map}")
     # if os.path.exists(RUN_DIR):
         # shutil.rmtree(RUN_DIR)
