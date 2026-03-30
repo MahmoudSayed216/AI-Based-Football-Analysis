@@ -14,6 +14,7 @@ BASE_DIR = os.getenv("BASE_DIR")
 WEIGHTS_DIR = os.path.join(BASE_DIR, "weights")
 OUTPUT_DIR = os.path.join(BASE_DIR, "best_model")
 DATASET_DIR = os.path.join(BASE_DIR, "dataset", "data.yaml")
+RUN_DIR = os.path.join(BASE_DIR, "runs")
 os.makedirs(name=OUTPUT_DIR, exist_ok=True)
 
 current_best_map = -100
@@ -34,14 +35,16 @@ def train_model(model_path, model_name):
                 plots=False,
                 save_period=-1,
                 exist_ok=True,
-                val=False)
+                val=False,
+                amp=False)
 
 
     val_map = model.metrics.box.map
     print(f"map@50-95: {val_map}")
     if val_map > current_best_map:
+        print("Model updated")
         current_best_map = val_map
-        model.val(data=DATASET_DIR, plots=True)
+        model.val(data=DATASET_DIR, plots=True, project=RUN_DIR)
         # shutil.copytree(src, OUTPUT_DIR, dirs_exist_ok=True)
             
 
