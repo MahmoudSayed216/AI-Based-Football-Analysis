@@ -41,11 +41,15 @@ def train_model(model_path, model_name):
 
     val_map = model.metrics.box.map
     print(f"map@50-95: {val_map}")
+    shutil.rmtree(RUN_DIR)
     if val_map > current_best_map:
+        shutil.rmtree(OUTPUT_DIR)
         print("Model updated")
         current_best_map = val_map
         model.val(data=DATASET_DIR, plots=True, project=RUN_DIR)
-        # shutil.copytree(src, OUTPUT_DIR, dirs_exist_ok=True)
+        model.save(filename=OUTPUT_DIR+'/best_.pt')
+        IMAGES_SRC_DIR = os.path.join(RUN_DIR, "val")
+        shutil.copytree(IMAGES_SRC_DIR, OUTPUT_DIR, dirs_exist_ok=True)
             
 
     print("################################")
