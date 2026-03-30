@@ -28,7 +28,7 @@ def train_model(model_path, model_name):
     print(f"Training {model_name}")
     model = YOLO(model=model_path, task='detect', verbose=False)
     model.train(data=DATASET_DIR,
-                epochs=2, 
+                epochs=100, 
                 imgsz=640, 
                 batch=16, 
                 # save=False,
@@ -40,7 +40,7 @@ def train_model(model_path, model_name):
                 name=model_name,
                 amp=False,
                 cos_lr = True,
-                # device=[0, 1],  # use both GPUs
+                device=[0, 1],  # use both GPUs
 )
 
 
@@ -48,14 +48,15 @@ def train_model(model_path, model_name):
     print(f"map@50-95: {val_map}")
     # if os.path.exists(RUN_DIR):
         # shutil.rmtree(RUN_DIR)
+    RUN_SRC_DIR = os.path.join(RUN_DIR, f"{model_name}")
     if val_map > current_best_map:
         shutil.rmtree(OUTPUT_DIR)
         os.makedirs(name=OUTPUT_DIR, exist_ok=True)
         print("Model updated")
         current_best_map = val_map
-        RUN_SRC_DIR = os.path.join(RUN_DIR, f"{model_name}")
         shutil.copytree(RUN_SRC_DIR, OUTPUT_DIR, dirs_exist_ok=True)
-            
+    shutil.rmtree(RUN_SRC_DIR)
+    
 
     print("################################")
 
