@@ -2,6 +2,7 @@ import requests
 import os
 from dotenv import load_dotenv
 import shutil
+import sys
 
 load_dotenv(".env")
 
@@ -27,7 +28,7 @@ def download_weights(weights_url, save_path):
 
 
 
-models = {
+models1 = {
     "Yolov08": ["https://github.com/ultralytics/assets/releases/download/v8.4.0/yolov8n.pt",
                "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolov8s.pt",
                "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolov8m.pt",
@@ -42,7 +43,9 @@ models = {
                 "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolov10s.pt",
                 "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolov10m.pt",
                 "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolov10b.pt",],
+}
 
+models2 = {
     "Yolov11": ["https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo11n.pt",
                 "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo11s.pt",
                 "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo11m.pt",
@@ -59,6 +62,12 @@ models = {
                 "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26l.pt"]
 }
 
+models = None
+if sys.argv[1] == "1":
+    models = models1
+
+if sys.argv[1] == "2":
+    models = models2
 
 for name, urls in models.items():
     print(f"name: {name}")
@@ -83,7 +92,8 @@ for name in models.keys():
         save_path = os.path.join(model_version_variants_path, f"{i}{model_variant_name}")
         download_weights(weights_url=url, save_path=save_path)
         print(f"{model_variant_name} downloaded to {save_path}.")
-        break
+        print("***********")
+        
 
     
 

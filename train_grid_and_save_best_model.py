@@ -31,21 +31,17 @@ def train_model(model_path, model_name):
                 epochs=100, 
                 imgsz=640, 
                 batch=16, 
-                # save=False,
-                # plots=False,
                 save_period=-1,
                 exist_ok=True,
-                # val=False,
                 project=RUN_DIR,
                 name=model_name,
                 amp=False,
                 cos_lr = True,
-                device=[0, 1],  # use both GPUs
+                device=[0, 1],
 )
 
     val_results = model.val(data=DATASET_DIR, imgsz=640, batch=16, device=[0, 1])
     val_map = val_results.box.map
-    print(f"map@50-95: {val_map}")
     # if os.path.exists(RUN_DIR):
         # shutil.rmtree(RUN_DIR)
     RUN_SRC_DIR = os.path.join(RUN_DIR, f"{model_name}")
@@ -58,6 +54,7 @@ def train_model(model_path, model_name):
     shutil.rmtree(RUN_SRC_DIR)
     
 
+    print(f"map@50-95: {val_map}")
     print("################################")
 
 
