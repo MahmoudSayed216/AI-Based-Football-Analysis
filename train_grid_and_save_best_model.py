@@ -37,7 +37,9 @@ def train_model(model_path, model_name):
                 exist_ok=True,
                 # val=False,
                 amp=False,
-                cos_lr = True)
+                cos_lr = True,
+                device=[0, 1],  # use both GPUs
+)
 
 
     val_map = model.metrics.box.map
