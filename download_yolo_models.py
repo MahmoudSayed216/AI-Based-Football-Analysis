@@ -28,12 +28,12 @@ def download_weights(weights_url, save_path):
 
 
 models = {
-    "Yolov8": ["https://github.com/ultralytics/assets/releases/download/v8.4.0/yolov8n.pt",
+    "Yolov08": ["https://github.com/ultralytics/assets/releases/download/v8.4.0/yolov8n.pt",
                "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolov8s.pt",
                "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolov8m.pt",
                "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolov8l.pt"],
     
-    "Yolov9": ["https://github.com/ultralytics/assets/releases/download/v8.4.0/yolov9t.pt",
+    "Yolov09": ["https://github.com/ultralytics/assets/releases/download/v8.4.0/yolov9t.pt",
                "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolov9s.pt",
                "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolov9m.pt",
                "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolov9c.pt"],
@@ -83,14 +83,12 @@ for name in models.keys():
         save_path = os.path.join(model_version_variants_path, f"{i}{model_variant_name}")
         download_weights(weights_url=url, save_path=save_path)
         print(f"{model_variant_name} downloaded to {save_path}.")
+        break
 
     
 
     
 
-
-
-# download_weights(models, os.path.join(WEIGHTS_DIR, "yolov8n"))
-
-
+print("_________________")
 print("Download complete")
+print("_________________")

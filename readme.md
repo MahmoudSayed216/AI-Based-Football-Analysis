@@ -11,6 +11,6 @@ python3 download_yolo_models.py
 ```
 
 download dataset
-```
+```python
 python3 download_dataset.py
 ```
