@@ -13,7 +13,7 @@ SETTINGS['mlflow'] = False
 BASE_DIR = os.getenv("BASE_DIR")
 WEIGHTS_DIR = os.path.join(BASE_DIR, "weights")
 OUTPUT_DIR = os.path.join(BASE_DIR, "best_model")
-DATASET_DIR = os.path.join("/home/mahmoud-sayed/Desktop/Code/Projects/Football Analysis/Football-Players-Detection/football-players-detection-1", "data.yaml")
+DATASET_DIR = os.path.join(BASE_DIR, "dataset","data.yaml")
 RUN_DIR = os.path.join(BASE_DIR, "runs")
 os.makedirs(name=OUTPUT_DIR, exist_ok=True)
 os.makedirs(name=RUN_DIR, exist_ok=True)
