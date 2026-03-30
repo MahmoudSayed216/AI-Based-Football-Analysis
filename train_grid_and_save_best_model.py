@@ -38,7 +38,7 @@ def train_model(model_path, model_name):
                 # val=False,
                 amp=False,
                 cos_lr = True,
-                # device=[0, 1],  # use both GPUs
+                device=[0, 1],  # use both GPUs
 )
 
 
