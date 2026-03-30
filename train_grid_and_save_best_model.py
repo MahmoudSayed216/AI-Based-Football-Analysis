@@ -44,7 +44,7 @@ def train_model(model_path, model_name):
 )
 
 
-    val_map = model.metrics.box.map
+    val_map = model.trainer.validator.metrics.box.map    
     print(f"map@50-95: {val_map}")
     # if os.path.exists(RUN_DIR):
         # shutil.rmtree(RUN_DIR)
@@ -77,5 +77,5 @@ for model_version in model_versions:
     for model_size in model_sizes:
         model_path = os.path.join(model_version_dir, model_size)
 
-        train_model(model_path, model_size)
+        train_model(model_path, model_size[1:])
 
