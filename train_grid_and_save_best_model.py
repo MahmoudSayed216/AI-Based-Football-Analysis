@@ -28,7 +28,7 @@ def train_model(model_path, model_name):
     print(f"Training {model_name}")
     model = YOLO(model=model_path, task='detect', verbose=False)
     results = model.train(data=DATASET_DIR,
-                epochs=2, 
+                epochs=100, 
                 imgsz=640, 
                 batch=16, 
                 # save=False,
