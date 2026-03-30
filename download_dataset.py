@@ -19,4 +19,4 @@ if os.path.exists(DATASET_DIR):
 rf = Roboflow(api_key=API_KEY)
 project = rf.workspace("roboflow-jvuqo").project("football-players-detection-3zvbc")
 version = project.version(1)
-dataset = version.download("yolov11", )
+dataset = version.download("yolov11", location=DATASET_DIR)
