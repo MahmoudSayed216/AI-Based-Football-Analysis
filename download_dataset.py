@@ -8,7 +8,7 @@ load_dotenv(".env")
 
 API_KEY = os.getenv("API_KEY")
 BASE_DIR = os.getenv("BASE_DIR")
-DATASET_DIR = os.path.join("BASE_DIR", "dataset")
+DATASET_DIR = os.path.join(BASE_DIR, "dataset")
 
 
 if os.path.exists(DATASET_DIR):
