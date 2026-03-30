@@ -32,11 +32,12 @@ def train_model(model_path, model_name):
                 imgsz=640, 
                 batch=16, 
                 # save=False,
-                plots=False,
+                # plots=False,
                 save_period=-1,
                 exist_ok=True,
                 # val=False,
                 project=RUN_DIR,
+                name=model_name,
                 amp=False,
                 cos_lr = True,
                 # device=[0, 1],  # use both GPUs
@@ -52,7 +53,7 @@ def train_model(model_path, model_name):
         os.makedirs(name=OUTPUT_DIR, exist_ok=True)
         print("Model updated")
         current_best_map = val_map
-        RUN_SRC_DIR = os.path.join(RUN_DIR, "train")
+        RUN_SRC_DIR = os.path.join(RUN_DIR, f"{model_name}")
         shutil.copytree(RUN_SRC_DIR, OUTPUT_DIR, dirs_exist_ok=True)
             
 
