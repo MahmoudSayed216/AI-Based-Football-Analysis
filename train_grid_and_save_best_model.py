@@ -30,7 +30,7 @@ def train_model(model_path, model_name):
     results = model.train(data=DATASET_DIR,
                 epochs=100, 
                 imgsz=640, 
-                batch=16, 
+                batch=10, 
                 save_period=-1,
                 exist_ok=True,
                 project=RUN_DIR,
