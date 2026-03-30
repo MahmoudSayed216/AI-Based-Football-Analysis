@@ -45,8 +45,8 @@ def train_model(model_path, model_name):
 
     val_map = model.metrics.box.map
     print(f"map@50-95: {val_map}")
-    if os.path.exists(RUN_DIR):
-        shutil.rmtree(RUN_DIR)
+    # if os.path.exists(RUN_DIR):
+        # shutil.rmtree(RUN_DIR)
     if val_map > current_best_map:
         shutil.rmtree(OUTPUT_DIR)
         os.makedirs(name=OUTPUT_DIR, exist_ok=True)
