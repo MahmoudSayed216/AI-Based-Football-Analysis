@@ -35,7 +35,7 @@ def train_model(model_path, model_name):
                 plots=False,
                 save_period=-1,
                 exist_ok=True,
-                val=False,
+                # val=False,
                 amp=False,
                 cos_lr = True)
 
