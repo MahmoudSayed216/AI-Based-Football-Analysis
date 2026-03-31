@@ -7,27 +7,33 @@ import sys
 
 
 
-
 def main():
     load_dotenv('.env')
     
     BASE_DIR = os.getenv('BASE_DIR')
     ASSETS_DIR = os.path.join(BASE_DIR, 'assets')
     MODEL_PATH = os.path.join(BASE_DIR, 'best_model', 'weights', 'best.pt')
-
+    cur_dir_name = os.path.dirname(os.path.abspath(__file__))
+    STUBS_DIR = os.path.join(cur_dir_name, "stubs")
+    os.makedirs(name=STUBS_DIR, exist_ok=True)
 
     video_name = sys.argv[1]
-    
+    batch_size = int(sys.argv[2])
+    read_from_stubs = bool(int(sys.argv[3]))
     video_full_path = os.path.join(ASSETS_DIR, video_name)
 
 
 
     video_frames = read_video_as_frames(video_path=video_full_path)
-    tracker = Tracker(model_path=MODEL_PATH)
-    tracker.get_object_tracks(video_frames)
+    tracker = Tracker(model_path=MODEL_PATH, batch_size=batch_size)
+    tracks = tracker.get_object_tracks(video_frames, read_from_stubs = read_from_stubs, stubs_path=STUBS_DIR+'/stubs.pkl')
+    print(tracks)
 
 
 
     save_video(video_frames, '')
+
+
+
 if __name__ == "__main__":
     main()
