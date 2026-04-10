@@ -25,14 +25,13 @@ def read_video_as_frames(video_path):
 
 
 
-def save_video(output_video_frames, save_path):
+def write_frames_as_video(output_video_frames, save_path):
     print("saving output video")
-    width, height, _ = output_video_frames[0].shape
-    print(width, height)
-    return
-    fourcc = cv2.VideoWRiter_fourcc(*'XVID')
-    out = cv2.VideoWriter(save_path, fourcc, 20.0, (width, height))
+    height, width, _ = output_video_frames[0].shape
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    out = cv2.VideoWriter(save_path, fourcc, 25.0, (width, height))
     for frame in output_video_frames:
+        frame = cv2.cvtColor(frame, code=cv2.COLOR_RGB2BGR)
         out.write(frame)
 
     out.release()

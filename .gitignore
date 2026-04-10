@@ -6,5 +6,6 @@ weights/
 runs/
 best_model/
 08fd33_4.mp4
-
+output/
+output.txt
 stubs/
