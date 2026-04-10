@@ -4,6 +4,7 @@ import pickle
 from utils import get_bbox_center, get_bbox_width
 import cv2
 import numpy as np
+import pandas as pd
 # class TID_BBOX_PAIR:
 #     def __init__(self, track_id: int, bbox: list[float]):
 #         self.track_id = track_id
@@ -30,6 +31,19 @@ class Tracker:
             detections.extend(predictions)
 
         return detections
+    
+    def interpolate_ball_positions(self,ball_positions):
+            ball_positions = [x.get(1,{}).get('bbox',[]) for x in ball_positions]
+            df_ball_positions = pd.DataFrame(ball_positions,columns=['x1','y1','x2','y2'])
+
+            # Interpolate missing values
+            df_ball_positions = df_ball_positions.interpolate()
+            df_ball_positions = df_ball_positions.bfill()
+
+            ball_positions = [{1: {"bbox":x}} for x in df_ball_positions.to_numpy().tolist()]
+
+            return ball_positions
+    
     
 
     def get_object_tracks(self, frames, read_from_stubs=False, stubs_path=None):
