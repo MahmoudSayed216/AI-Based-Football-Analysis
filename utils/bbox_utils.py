@@ -7,3 +7,5 @@ def get_bbox_center(bbox):
 def get_bbox_width(bbox):
     x1, x2 = bbox[0], bbox[2]
     return int(x2-x1)
+
+

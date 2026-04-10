@@ -73,13 +73,13 @@ class Tracker:
 
                 if class_name == "referee":
                     track_id = detection[4]
-                    tracks["referees"][frame_num][track_id] = bbox
+                    tracks["referees"][frame_num][track_id] = {'bbox': bbox}
                 elif class_name == "player":
                     track_id = detection[4]
-                    tracks["players"][frame_num][track_id] = bbox
+                    tracks["players"][frame_num][track_id] = {'bbox': bbox}
 
                 elif class_name == "ball":
-                    tracks["ball"][frame_num][1] = bbox
+                    tracks["ball"][frame_num][1] = {'bbox': bbox}
 
         
         if stubs_path is not None:
@@ -154,15 +154,15 @@ class Tracker:
 
 
             for track_id, player in players_dict.items():
-                frame = self.draw_ellips(frame, player, (0, 0, 255),track_id)
+                frame = self.draw_ellips(frame, player["bbox"], (0, 0, 255),track_id)
 
             for track_id, referee in referees_dict.items():
-                frame = self.draw_ellips(frame, referee, (0, 255, 0))
+                frame = self.draw_ellips(frame, referee["bbox"], (0, 255, 0))
             
             for track_id, ball in ball_dict.items():
                 # frame = self.draw_ellips(frame, ball, (255, 255, 0),track_id)
                 if ball:
-                    frame = self.draw_triangle(frame, ball, (0, 255, 0))
+                    frame = self.draw_triangle(frame, ball["bbox"], (255, 255, 255))
 
             output_frames.append(frame)
 
