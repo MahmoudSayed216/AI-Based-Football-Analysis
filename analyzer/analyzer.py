@@ -5,6 +5,17 @@ from .modules.team_assigner import TeamAssigner
 from .modules.view_transformer import ViewTransformer
 from .modules.tracker import Tracker
 import numpy as np
+import os
+
+
+def _env_color(key, default):
+    val = os.environ.get(key)
+    if val:
+        try:
+            return tuple(int(v) for v in val.split(","))
+        except Exception:
+            pass
+    return default
 
 
 class Analyzer:
@@ -48,6 +59,12 @@ class Analyzer:
         team_assigner = TeamAssigner()
         team_assigner.assign_team_color(video_frames[0], 
                                         tracks['players'][0])
+
+        # Override with user-chosen colours if set
+        c1 = _env_color("FA_COLOR_TEAM1", None)
+        c2 = _env_color("FA_COLOR_TEAM2", None)
+        if c1: team_assigner.team_colors[1] = c1
+        if c2: team_assigner.team_colors[2] = c2
         
         for frame_num, player_track in enumerate(tracks['players']):
             for player_id, track in player_track.items():

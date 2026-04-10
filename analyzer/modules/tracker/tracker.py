@@ -5,6 +5,7 @@ from utils import get_bbox_center, get_bbox_width, get_foot_position
 import cv2
 import numpy as np
 import pandas as pd
+import os
 # class TID_BBOX_PAIR:
 #     def __init__(self, track_id: int, bbox: list[float]):
 #         self.track_id = track_id
@@ -208,6 +209,20 @@ class Tracker:
         return frame
 
     def draw_annotations(self,video_frames, tracks,team_ball_control):
+
+        def _env_color(key, default):
+            val = os.environ.get(key)
+            if val:
+                try:
+                    return tuple(int(v) for v in val.split(","))
+                except Exception:
+                    pass
+            return default
+
+        color_referee  = _env_color("FA_COLOR_REFEREE",  (0, 255, 255))
+        color_ball     = _env_color("FA_COLOR_BALL",     (0, 255, 125))
+        color_has_ball = _env_color("FA_COLOR_HAS_BALL", (0, 0, 255))
+
         output_video_frames= []
         for frame_num, frame in enumerate(video_frames):
             frame = frame.copy()
@@ -222,15 +237,15 @@ class Tracker:
                 frame = self.draw_ellipse(frame, player["bbox"],color, track_id)
 
                 if player.get('has_ball',False):
-                    frame = self.draw_traingle(frame, player["bbox"],(0,0,255))
+                    frame = self.draw_traingle(frame, player["bbox"], color_has_ball)
 
             # Draw Referee
             for _, referee in referee_dict.items():
-                frame = self.draw_ellipse(frame, referee["bbox"],(0,255,255))
+                frame = self.draw_ellipse(frame, referee["bbox"], color_referee)
             
             # Draw ball 
             for track_id, ball in ball_dict.items():
-                frame = self.draw_traingle(frame, ball["bbox"],(0,255,125))
+                frame = self.draw_traingle(frame, ball["bbox"], color_ball)
 
 
             # Draw Team Ball Control
