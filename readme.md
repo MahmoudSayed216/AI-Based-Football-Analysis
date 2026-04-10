@@ -178,7 +178,7 @@ $BASE_DIR/assets/
 ### Option A — Desktop UI (Recommended)
 
 ```bash
-python app.py
+python main.py
 ```
 
 See the [UI section](#ui--desktop-application) below for full usage instructions.
