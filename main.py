@@ -15,8 +15,7 @@ def main():
     MODEL_PATH = os.path.join(BASE_DIR, 'best_model', 'weights', 'best.pt')
     OUTPUT_DIR = os.path.join(BASE_DIR, "output")
     OUTPUT_VIDEO_PATH = os.path.join(OUTPUT_DIR, "output.mp4")
-    cur_dir_name = os.path.dirname(os.path.abspath(__file__))
-    STUBS_DIR = os.path.join(cur_dir_name, "stubs")
+    STUBS_DIR = os.path.join(BASE_DIR, "stubs")
     os.makedirs(name=STUBS_DIR, exist_ok=True)
 
     video_name = sys.argv[1]
